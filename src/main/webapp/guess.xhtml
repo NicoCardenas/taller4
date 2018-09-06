@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+    </h:head>
+    <h:body>
+        <h1>Bienvenido al juego</h1>
+        <h:form id="guess_form">
+            <!--En una aplicacion real, no se debería tener este elemento, solo se crea con el fin de simplificar una prueba futura. display: none;-->            
+            <p:outputLabel style="display: none;" value="#{guessBean.numRandom}"></p:outputLabel>
+            <!-- para que el usuario ingrese su número.-->
+            <!-- p:inputText usa el get y set. el get para renderizar(graficar)-->
+            <!-- p:outputLabel solo usa get para mostrar-->
+            <p:inputText value="numero">Ingrese un numero: </p:inputText><br></br>
+            <!-- para mostrar el número de intentos realizados.-->
+            <label>Intento numero: </label>
+            <p:outputLabel value="#{guessBean.intentos}"></p:outputLabel><br></br>
+            <!-- para mostrar el estado del juego.-->
+            <label>Estado del juego: </label>
+            <p:outputLabel value="#{guessBean.estado}"></p:outputLabel><br></br>
+            <!-- para mostrar en cuanto va el premio.-->
+            <label>Premio Acumulado: </label>
+            <p:outputLabel value="#{guessBean.premioAcum}"></p:outputLabel> <br></br>
+            <!--el nombre del formulario en el que se agregaron los campos antes descritos, de manera que al hacer clic, se ejecute un ciclo de JSF y se refresque la vista.-->
+            <!--actionListener con la cual se le indicará que, al hacer clic, se ejecutará el método guess, creado en el backing-bean de sesión-->
+            <p:commandButton update="guess_form" value="Enviar" actionListener="#{guessBean.guess(numero)}"></p:commandButton>
+            <p:commandButton update="guess_form" value="Reiniciar" actionListener="#{guessBean.restart()}"></p:commandButton>
+        </h:form>
+    </h:body>
+    <!-- -->
+</html>
+
+
