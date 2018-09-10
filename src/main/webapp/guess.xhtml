@@ -14,6 +14,32 @@
             <p:outputLabel style="display: none;" value="#{guessBean.numRandom}"></p:outputLabel>
             <label>Intentos realizados: </label>
             <p:outputLabel value="#{guessBean.attents}"></p:outputLabel>
+            <table style="width:100%">
+                <tr>
+                  <th>1</th>
+                  <th>2</th> 
+                  <th>3</th>
+                  <th>4</th>
+                  <th>5</th> 
+                  <th>6</th>
+                  <th>7</th>
+                  <th>8</th> 
+                  <th>9</th>
+                  <th>10</th>
+                </tr>
+                <tr>
+                    <th>#{guessBean.getAttent(0)}</th>
+                    <th>#{guessBean.getAttent(1)}</th> 
+                    <th>#{guessBean.getAttent(2)}</th>
+                    <th>#{guessBean.getAttent(3)}</th>
+                    <th>#{guessBean.getAttent(4)}</th> 
+                    <th>#{guessBean.getAttent(5)}</th>
+                    <th>#{guessBean.getAttent(6)}</th>
+                    <th>#{guessBean.getAttent(7)}</th> 
+                    <th>#{guessBean.getAttent(8)}</th>
+                    <th>#{guessBean.getAttent(9)}</th>
+                </tr>
+              </table>           
             <br></br>
             <!-- para que el usuario ingrese su número.-->
             <!-- p:inputText usa el get y set. el get para renderizar(graficar)-->

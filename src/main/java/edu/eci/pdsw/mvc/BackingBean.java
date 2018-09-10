@@ -1,8 +1,8 @@
 package edu.eci.pdsw.mvc;
 
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.SessionScoped;
@@ -17,7 +17,7 @@ public class BackingBean {
     private int premioAcum = 100000;
     private String estado = "En Juego";
     private boolean win = false;
-    private List<Integer> attents = new ArrayList<Integer>();
+    private List<Integer> attents = new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,0,0,0,0));
     
     public BackingBean(){
         
@@ -27,7 +27,10 @@ public class BackingBean {
         intentos++;
         String a = "numero: " + Integer.toString(inputUser)+ " numero de comparacion: "+ Integer.toString(numRandom);
         System.out.println(a);
-        attents.add(inputUser);
+        //attents.add(inputUser);
+        if (intentos < 11) {
+            attents.set(intentos-1, inputUser);
+        }     
         inputUser = 0;
         if (win) {
             restart();
@@ -49,7 +52,8 @@ public class BackingBean {
         intentos = 0;
         premioAcum = 100000;
         estado = "En Juego";
-        attents = new ArrayList<Integer>();
+        attents = new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,0,0,0,0));
+        win = false;
     } 
     
 
@@ -99,5 +103,9 @@ public class BackingBean {
             temp += (" " + Integer.toString(attent));
         }
         return temp + " ]";
+    }
+    
+    public String getAttent(int position) {
+        return Integer.toString(attents.get(position));
     }
 }
