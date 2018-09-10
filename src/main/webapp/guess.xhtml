@@ -8,9 +8,13 @@
     </h:head>
     <h:body>
         <h1>Bienvenido al juego</h1>
+        <h4>    Intenta adivinar el numero al azar que esta entre el 0 y el 100.</h4>
         <h:form id="guess_form">
             <!--En una aplicacion real, no se debería tener este elemento, solo se crea con el fin de simplificar una prueba futura. display: none;-->            
             <p:outputLabel style="display: none;" value="#{guessBean.numRandom}"></p:outputLabel>
+            <label>Intentos realizados: </label>
+            <p:outputLabel value="#{guessBean.attents}"></p:outputLabel>
+            <br></br>
             <!-- para que el usuario ingrese su número.-->
             <!-- p:inputText usa el get y set. el get para renderizar(graficar)-->
             <!-- p:outputLabel solo usa get para mostrar-->

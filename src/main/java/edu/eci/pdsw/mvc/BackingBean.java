@@ -1,19 +1,23 @@
 package edu.eci.pdsw.mvc;
 
-import javax.ejb.Singleton;
-import javax.enterprise.context.ApplicationScoped;
+
+import java.util.List;
+import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "guessBean")
-@ApplicationScoped
-@Singleton
+//@ApplicationScoped
+@SessionScoped
 public class BackingBean {
-    private static int numRandom = (int)(Math.random() * 100) + 1;
-    private static int inputUser;
-    private static int intentos = 0;
-    private static int premioAcum = 100000;
-    private static String estado = "En Juego";
-    private static boolean win = false;
+    private int numRandom = (int)(Math.random() * 100) + 1;
+    private int inputUser;
+    private int intentos = 0;
+    private int premioAcum = 100000;
+    private String estado = "En Juego";
+    private boolean win = false;
+    private List<Integer> attents = new ArrayList<Integer>();
     
     public BackingBean(){
         
@@ -23,6 +27,8 @@ public class BackingBean {
         intentos++;
         String a = "numero: " + Integer.toString(inputUser)+ " numero de comparacion: "+ Integer.toString(numRandom);
         System.out.println(a);
+        attents.add(inputUser);
+        inputUser = 0;
         if (win) {
             restart();
         } else if (inputUser == numRandom) {
@@ -43,6 +49,7 @@ public class BackingBean {
         intentos = 0;
         premioAcum = 100000;
         estado = "En Juego";
+        attents = new ArrayList<Integer>();
     } 
     
 
@@ -51,7 +58,7 @@ public class BackingBean {
     }
 
     public void setNumRandom(int numRandom) {
-        BackingBean.numRandom = numRandom;
+        this.numRandom = numRandom;
     }
 
     public int getIntentos() {
@@ -84,5 +91,13 @@ public class BackingBean {
     
     public void setInputUser(int input){
         this.inputUser = input;
+    }
+    
+    public String getAttents(){
+        String temp = "[";
+        for (int attent : attents) {
+            temp += (" " + Integer.toString(attent));
+        }
+        return temp + " ]";
     }
 }
