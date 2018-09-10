@@ -14,7 +14,7 @@
             <!-- para que el usuario ingrese su número.-->
             <!-- p:inputText usa el get y set. el get para renderizar(graficar)-->
             <!-- p:outputLabel solo usa get para mostrar-->
-            <p:inputText value="numero">Ingrese un numero: </p:inputText>
+            <p:inputText value="#{guessBean.inputUser}" required="true">Ingrese un numero: </p:inputText>
             <br></br>
             <!-- para mostrar el número de intentos realizados.-->
             <label>Intento numero: </label>
@@ -31,7 +31,7 @@
             <br></br>
             <!--el nombre del formulario en el que se agregaron los campos antes descritos, de manera que al hacer clic, se ejecute un ciclo de JSF y se refresque la vista.-->
             <!--actionListener con la cual se le indicará que, al hacer clic, se ejecutará el método guess, creado en el backing-bean de sesión-->
-            <p:commandButton update="guess_form" value="Enviar" actionListener="#{guessBean.guess(numero)}"></p:commandButton>
+            <p:commandButton update="guess_form" value="Enviar" actionListener="#{guessBean.guess()}" icon="ui-icon-check"></p:commandButton>
             <label></label>
             <p:commandButton update="guess_form" value="Reiniciar" actionListener="#{guessBean.restart()}"></p:commandButton>
         </h:form>

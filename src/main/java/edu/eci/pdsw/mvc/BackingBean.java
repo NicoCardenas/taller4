@@ -1,38 +1,45 @@
 package edu.eci.pdsw.mvc;
 
-import java.util.Random;
+import javax.ejb.Singleton;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean(name = "guessBean")
 @ApplicationScoped
+@Singleton
 public class BackingBean {
-    private int numRandom;
-    private int intentos;
-    private int premioAcum;
-    private String estado;
+    private static int numRandom = (int)(Math.random() * 100) + 1;
+    private static int inputUser;
+    private static int intentos = 0;
+    private static int premioAcum = 100000;
+    private static String estado = "En Juego";
+    private static boolean win = false;
     
     public BackingBean(){
-        restart();       
+        
     }
     
-    public void guess(int numero){
+    public void guess(){
         intentos++;
-        if (numero == numRandom) {
-            estado = "Ganó. Premio: " + premioAcum;
+        String a = "numero: " + Integer.toString(inputUser)+ " numero de comparacion: "+ Integer.toString(numRandom);
+        System.out.println(a);
+        if (win) {
             restart();
-        } else if (numero != numRandom) { 
-            premioAcum -= 10000;           
-            if(premioAcum==0){
-                estado = "No Ganó";
+        } else if (inputUser == numRandom) {
+            estado = "Ganó. Premio: " + premioAcum;  
+            win = true;
+        } else if (inputUser != numRandom) { 
+            premioAcum -= 10000;
+            if (estado.equals("No Ganó")) {
                 restart();
+            }else if(premioAcum == 0){
+                estado = "No Ganó";               
             }
         }
-
     }
     
-     public void restart(){
-        numRandom = (new Random().nextInt());       
+    public void restart(){
+        numRandom = (int)(Math.random() * 100) + 1;  
         intentos = 0;
         premioAcum = 100000;
         estado = "En Juego";
@@ -44,7 +51,7 @@ public class BackingBean {
     }
 
     public void setNumRandom(int numRandom) {
-        this.numRandom = numRandom;
+        BackingBean.numRandom = numRandom;
     }
 
     public int getIntentos() {
@@ -69,5 +76,13 @@ public class BackingBean {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }       
+    }   
+    
+    public int getInputUser(){
+        return inputUser;
+    }
+    
+    public void setInputUser(int input){
+        this.inputUser = input;
+    }
 }
