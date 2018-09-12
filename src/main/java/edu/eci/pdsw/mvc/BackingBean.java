@@ -24,9 +24,13 @@ public class BackingBean {
     }
     
     public void guess(){
+        boolean temp;
         intentos++;
-        String a = "numero: " + Integer.toString(inputUser)+ " numero de comparacion: "+ Integer.toString(numRandom);
-        System.out.println(a);
+
+        System.out.println("numero: " + Integer.toString(inputUser)+ " numero de comparacion: "+ Integer.toString(numRandom));
+        
+        temp = inputUser == numRandom;
+        
         //attents.add(inputUser);
         if (intentos < 11) {
             attents.set(intentos-1, inputUser);
@@ -34,10 +38,10 @@ public class BackingBean {
         inputUser = 0;
         if (win) {
             restart();
-        } else if (inputUser == numRandom) {
-            estado = "Ganó. Premio: " + premioAcum;  
+        } else if (temp) {
+            estado = "Ganó. Premio: " + premioAcum;          
             win = true;
-        } else if (inputUser != numRandom) { 
+        } else if (!temp) {         
             premioAcum -= 10000;
             if (estado.equals("No Ganó")) {
                 restart();
